@@ -1,17 +1,9 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Inter } from 'next/font/google';
 import "./globals.css";
+import Link from "next/link";
+const inter = Inter({ subsets: ["latin"] });
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -25,10 +17,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={inter.className}>
+        <section className="md:w-1/2 mx-auto font-mono px-4 md:px-0">
+          <nav className=" flex flex-row md:items-center justify-between my-5 md:my-10 border-b border-b-gray-600 pb-3">
+            <Link rel="stylesheet" href={"/"} className="text-4xl font-bold uppercase">NextJS Prisma Vercel Postgres Auth Blog</Link>
+            <Link href={"/components/add-post"} className=" text-white bg-black font-medium py-1 px-3 rounded-md w-fit text-2xl">+</Link>
+          </nav>
+          <div>{children}</div>
+          <footer className="bottom-0">
+            <p className="my-10 text-center font-medium text-sm text-gray-500">
+              By KMM@codehub.mm.com
+            </p>
+          </footer>
+        </section>
       </body>
     </html>
   );
